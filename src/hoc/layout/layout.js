@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
-import './layout.css'
+import classes from './layout.module.css'
 
 class Layout extends Component {
     render() {
         return (
-            <div className="Layout">
+            <div className={classes.Layout}>
                 <main>
                     { this.props.children }
                 </main>

@@ -1,4 +1,3 @@
-import './App.css';
 import Layout from './hoc/layout/layout'
 import Quiz from './containers/Quiz/Quiz'
 

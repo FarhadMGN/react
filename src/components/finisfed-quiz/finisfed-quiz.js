@@ -1,9 +1,8 @@
 import React from 'react'
-import classes from "./finisfed-quiz.css"
+import classes from "./finisfed-quiz.module.css"
 import Button from "../UI/button/button";
 
 const FinishedQuiz = props => {
-    console.log("classes", classes);
     const successCount = Object.keys(props.results).reduce((total, key) => {
         if (props.results[key] === 'success') {
             total++;
@@ -17,7 +16,7 @@ const FinishedQuiz = props => {
                     const cls = [
                         'fa',
                         props.results[question.id] === 'error' ? 'fa-times' : 'fa-check',
-                        props.results[question.id] === 'error' ? 'error' : 'success',
+                        props.results[question.id] === 'error' ? classes.error : classes.success,
                     ];
                     return (
                         <li key={index}>

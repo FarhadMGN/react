@@ -1,10 +1,10 @@
-import React, {Component} from 'react'
-import './button.css'
+import React from 'react'
+import classes from './button.module.css'
 
 const Button = props => {
     const cls = [
         'Button',
-        props.type
+        classes[props.type]
     ];
     return (
         <button

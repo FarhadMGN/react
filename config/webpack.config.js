@@ -110,7 +110,12 @@ module.exports = function (webpackEnv) {
       },
       {
         loader: require.resolve('css-loader'),
-        options: cssOptions,
+        options: {
+          importLoaders: 1,
+          modules: {
+            localIdentName: '[name]__[local]___[hash:base64:5]'
+          },
+        },
       },
       {
         // Options for PostCSS as we reference these options twice
@@ -473,8 +478,12 @@ module.exports = function (webpackEnv) {
               use: getStyleLoaders({
                 importLoaders: 1,
                 sourceMap: isEnvProduction
-                  ? shouldUseSourceMap
-                  : isEnvDevelopment,
+                    ? shouldUseSourceMap
+                    : isEnvDevelopment,
+
+                modules: true,
+                getLocalIdent: getCSSModuleLocalIdent,
+                localIdentName: '[name]__[local]__[hash:base64:5]'
               }),
               // Don't consider CSS imports dead code even if the
               // containing package claims to have no side effects.
@@ -489,12 +498,11 @@ module.exports = function (webpackEnv) {
               use: getStyleLoaders({
                 importLoaders: 1,
                 sourceMap: isEnvProduction
-                  ? shouldUseSourceMap
-                  : isEnvDevelopment,
-                localIdentName: '[name]__[local]__[hash:base64:5]',
-                modules: {
-                  getLocalIdent: getCSSModuleLocalIdent,
-                },
+                    ? shouldUseSourceMap
+                    : isEnvDevelopment,
+                modules: true,
+                getLocalIdent: getCSSModuleLocalIdent,
+                localIdentName: '[name]__[local]__[hash:base64:5]'
               }),
             },
             // Opt-in support for SASS (using .scss or .sass extensions).
@@ -504,13 +512,16 @@ module.exports = function (webpackEnv) {
               test: sassRegex,
               exclude: sassModuleRegex,
               use: getStyleLoaders(
-                {
-                  importLoaders: 3,
-                  sourceMap: isEnvProduction
-                    ? shouldUseSourceMap
-                    : isEnvDevelopment,
-                },
-                'sass-loader'
+                  {
+                    importLoaders: 2,
+                    sourceMap: isEnvProduction
+                        ? shouldUseSourceMap
+                        : isEnvDevelopment,
+                    modules: true,
+                    getLocalIdent: getCSSModuleLocalIdent,
+                    localIdentName: '[name]__[local]__[hash:base64:5]'
+                  },
+                  'sass-loader'
               ),
               // Don't consider CSS imports dead code even if the
               // containing package claims to have no side effects.
@@ -523,16 +534,16 @@ module.exports = function (webpackEnv) {
             {
               test: sassModuleRegex,
               use: getStyleLoaders(
-                {
-                  importLoaders: 3,
-                  sourceMap: isEnvProduction
-                    ? shouldUseSourceMap
-                    : isEnvDevelopment,
-                  modules: {
+                  {
+                    importLoaders: 2,
+                    sourceMap: isEnvProduction
+                        ? shouldUseSourceMap
+                        : isEnvDevelopment,
+                    modules: true,
                     getLocalIdent: getCSSModuleLocalIdent,
+                    localIdentName: '[name]__[local]__[hash:base64:5]'
                   },
-                },
-                'sass-loader'
+                  'sass-loader'
               ),
             },
             // "file" loader makes sure those assets get served by WebpackDevServer.

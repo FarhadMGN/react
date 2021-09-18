@@ -1,10 +1,10 @@
 import React from 'react'
-import './active-quiz.css'
+import classes from './active-quiz.module.css'
 import AnswersList from "./answers-list/ansers-list";
 
 const ActiveQuiz = props =>  (
-    <div className="ActiveQuiz">
-        <p className="Question">
+    <div className={classes.ActiveQuiz}>
+        <p className={classes.Question}>
             <span>
                 <strong>{props.answerNumber}</strong>&nbsp;
                 { props.question }

@@ -1,9 +1,9 @@
 import React from 'react'
-import './answers-list.css'
+import classes from './answers-list.module.css'
 import AnswerItem from "./answer-item/answer-item";
 
 const AnswersList = props => (
-    <ul className="AnwsersList">
+    <ul className={classes.AnwsersList}>
         { props.answers.map((answer, index) => {
             return (
                 <AnswerItem
