@@ -35,6 +35,10 @@ class Quiz extends Component {
 
     isQuizFinished() {
         return this.state.activeQuestion + 1 === this.state.quiz?.length;
+    };
+
+    componentDidMount() {
+        console.log('quiz id', this.props.match.params.id)
     }
 
     onAnswerClickHandler = answer => {
@@ -88,7 +92,7 @@ class Quiz extends Component {
             activeQuestion: 0,
             answerState: null,
         })
-    }
+    };
 
     render() {
 
