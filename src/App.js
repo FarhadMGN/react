@@ -1,7 +1,6 @@
 import Layout from './hoc/layout/layout'
 import Quiz from './containers/Quiz/Quiz'
-import {Route, NavLink, Switch} from 'react-router-dom'
-import classes from "./components/navigation/drawer/drawer.module.css";
+import {Route, Switch} from 'react-router-dom'
 import QuizCreatorComponent from "./containers/quiz-creator/quiz-creator";
 import AuthComponent from "./containers/auth/auth";
 import QuizListComponent from "./containers/quiz-list/quiz-list";

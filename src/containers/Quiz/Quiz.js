@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import classes from './Quiz.module.css'
 import ActiveQuiz from "../../components/active-quiz/active-quiz";
 import FinishedQuiz from "../../components/finisfed-quiz/finisfed-quiz";
-console.log('classes!!!!', classes);
+
 class Quiz extends Component {
     state = {
         results: {},

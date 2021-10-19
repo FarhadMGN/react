@@ -3,8 +3,8 @@ import classes from './button.module.css'
 
 const Button = props => {
     const cls = [
-        'Button',
-        classes[props.type]
+        classes.Button,
+        classes[props.type],
     ];
     return (
         <button

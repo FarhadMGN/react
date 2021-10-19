@@ -7,6 +7,7 @@ import Input from "../../components/UI/input/input";
 export default class AuthComponent extends React.Component {
 
     state = {
+        isFromValid: null,
         formControls: {
             email: {
                 value: '',
@@ -49,14 +50,14 @@ export default class AuthComponent extends React.Component {
             return true
         }
         let isValid = true;
-        if (validation.required) {
+        if (validation?.required) {
             isValid = value.trim() !== "" && isValid;
         }
-        if (validation.email) {
+        if (validation?.email) {
             const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             isValid = re.test(String(value).toLowerCase()) && isValid;
         }
-        if (validation.minLength) {
+        if (validation?.minLength) {
             isValid = value.length >= validation.minLength && isValid;
         }
         return isValid;
@@ -71,11 +72,17 @@ export default class AuthComponent extends React.Component {
         control.touched = true;
         control.valid = this.validateControl(control.value, control.validation);
 
+        let isFormValid = true;
+
+        Object.keys(formControls)?.forEach((cont) => {
+            isFormValid = formControls[cont].valid && isFormValid;
+        });
         formControls[controlName] = control;
 
         this.setState({
+            isFormValid,
             formControls
-        })
+        });
     };
 
 
@@ -109,11 +116,13 @@ export default class AuthComponent extends React.Component {
 
                         { this.renderInputs() }
                         <Button
+                            disabled={!this.state.isFromValid}
                             onClick={this.loginHandler}
                             type="success">
                             Login
-                        </Button><
-                        Button
+                        </Button>
+                        <Button
+                            disabled={!this.state.isFromValid}
                             onClick={this.registrationHandler}
                             type="primary">
                             Registration
