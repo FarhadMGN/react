@@ -16,7 +16,8 @@ function App() {
               <Route path={'/quiz-creator'} exact component={QuizCreatorComponent}/>
               <Route path={'/quiz/:id'} exact component={Quiz}/>
               <Route path={'/'} exact component={QuizListComponent}/>
-              <div>nihao</div>
+              <div>nihao12</div>
+              <p>oleg</p>
           </Switch>
       </Layout>
   );
