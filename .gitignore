@@ -2,8 +2,8 @@
 
 .idea
 #credentials
-/src/axios/secrets.js
-/src/axios/axios-quiz.js
+/src/rest/secrets.js
+/src/rest/axios-quiz.js
 
 # dependencies
 /node_modules

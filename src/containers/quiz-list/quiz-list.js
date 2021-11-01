@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import classes from './quiz-list.module.css'
 import {NavLink} from "react-router-dom";
-import axios from "../../axios/axios-quiz";
+import axios from "../../rest/axios-quiz";
 import Loader from "../../components/UI/loader/loader";
 
 

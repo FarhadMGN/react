@@ -3,7 +3,7 @@ import classes from './auth.module.css'
 import Button from "../../components/UI/button/button";
 import Input from "../../components/UI/input/input";
 import axios from "axios";
-import API_KEY from "../../axios/secrets";
+import API_KEY from "../../rest/secrets";
 
 export default class AuthComponent extends React.Component {
 

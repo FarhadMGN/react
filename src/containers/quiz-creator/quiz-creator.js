@@ -4,7 +4,7 @@ import Button from "../../components/UI/button/button";
 import {createControl, validate, validateForm} from "../../form/form-helper"
 import Input from "../../components/UI/input/input";
 import Select from "../../components/UI/select/select";
-import axios from "../../axios/axios-quiz";
+import axios from "../../rest/axios-quiz";
 
 function createFormControls() {
     return {
