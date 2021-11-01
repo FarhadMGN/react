@@ -4,6 +4,7 @@ import Button from "../../components/UI/button/button";
 import {createControl, validate, validateForm} from "../../form/form-helper"
 import Input from "../../components/UI/input/input";
 import Select from "../../components/UI/select/select";
+import axios from "../../rest/axios-quiz";
 
 function createFormControls() {
     return {
@@ -54,19 +55,19 @@ export default class QuizCreatorComponent extends Component {
             answers: [
                 {
                     text: option1.value,
-                    is: option1.id
+                    id: option1.id
                 },
                 {
                     text: option2.value,
-                    is: option2.id
+                    id: option2.id
                 },
                 {
                     text: option3.value,
-                    is: option3.id
+                    id: option3.id
                 },
                 {
                     text: option4.value,
-                    is: option4.id
+                    id: option4.id
                 },
             ]
 
@@ -79,9 +80,27 @@ export default class QuizCreatorComponent extends Component {
             formControls: createFormControls()
         })
     };
-    CreateQuizHandler = event => {
+    CreateQuizHandler = async (event) => {
         event.preventDefault();
         console.log(this.state.quiz);
+        // axios.post('https://react-practice-d3db9-default-rtdb.firebaseio.com/quizes.json', this.state.quiz)
+        //     .then((res) => {
+        //         console.log(res)
+        //     })
+        //     .catch((err) => {
+        //         console.log(err)
+        //     })
+        try {
+            await axios.post('/quizes.json', this.state.quiz);
+            this.setState({
+                quiz: [],
+                rightAnswerId: 1,
+                isFormValid: false,
+                formControls: createFormControls()
+            })
+        } catch (e) {
+            console.log(e);
+        }
     };
 
     changeHandler(value, controlName) {
@@ -111,9 +130,8 @@ export default class QuizCreatorComponent extends Component {
         const inputs = Object.keys(this.state.formControls).map((controlName, idx) => {
             const control = this.state.formControls[controlName];
             return (
-                <>
+                <div key={idx}>
                     <Input
-                        key={idx}
                         type={control.type}
                         value={control.value}
                         touched={control.touched}
@@ -125,7 +143,7 @@ export default class QuizCreatorComponent extends Component {
                     >
                     </Input>
                     { idx === 0 ? <hr/> : null }
-                </>
+                </div>
             )
         });
         return inputs;
