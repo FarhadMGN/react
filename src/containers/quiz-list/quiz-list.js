@@ -43,6 +43,8 @@ class QuizListComponent extends Component {
     }
 }
 
+//will trigger every time when state change
+//in the component is possible to use this.props.quizes(isLoading)
 function mapStateToProps(state) {
     return {
         quizes: state.quiz.quizes,
@@ -50,6 +52,7 @@ function mapStateToProps(state) {
     }
 }
 
+//this function forwards in component some methods to store updating, to avoid dispatch methods call directly from component
 function mapDispatchToProps(dispatch) {
     return {
         fetchQuizes: () => dispatch(fetchQuizes())
