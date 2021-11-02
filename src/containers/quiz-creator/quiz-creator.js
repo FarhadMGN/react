@@ -83,13 +83,6 @@ export default class QuizCreatorComponent extends Component {
     CreateQuizHandler = async (event) => {
         event.preventDefault();
         console.log(this.state.quiz);
-        // axios.post('https://react-practice-d3db9-default-rtdb.firebaseio.com/quizes.json', this.state.quiz)
-        //     .then((res) => {
-        //         console.log(res)
-        //     })
-        //     .catch((err) => {
-        //         console.log(err)
-        //     })
         try {
             await axios.post('/quizes.json', this.state.quiz);
             this.setState({

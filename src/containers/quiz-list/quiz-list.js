@@ -1,17 +1,14 @@
 import React, {Component} from 'react'
 import classes from './quiz-list.module.css'
 import {NavLink} from "react-router-dom";
-import axios from "../../rest/axios-quiz";
 import Loader from "../../components/UI/loader/loader";
+import {connect} from "react-redux";
+import {fetchQuizes} from "../../store/actions/quiz.action";
 
 
-export default class QuizListComponent extends Component {
-    state = {
-        quizes: [],
-        isLoading: true
-    };
+class QuizListComponent extends Component {
     renderQuizes() {
-        return this.state.quizes.map((quiz) => {
+        return this.props.quizes.map((quiz) => {
             return (
                 <li
                     key={quiz.id}
@@ -26,30 +23,8 @@ export default class QuizListComponent extends Component {
         })
     }
 
-    async componentDidMount() {
-        try {
-            this.setState({
-                isLoading: true
-            });
-            const response = await axios.get('/quizes.json');
-            console.log('data', response.data);
-            const quizes = [];
-            Object.keys(response.data).forEach((key, idx) => {
-                quizes.push({
-                    id: key,
-                    name: `Test №${idx + 1}`
-                })
-            });
-            this.setState({
-                quizes,
-                isLoading: false
-            });
-        } catch (e) {
-            this.setState({
-                quizes: [],
-                isLoading: false
-            });
-        }
+    componentDidMount() {
+        this.props.fetchQuizes();
     };
 
     render() {
@@ -57,7 +32,7 @@ export default class QuizListComponent extends Component {
             <div className={classes.QuizList}>
                 <div>
                     <h1>Quiz List</h1>
-                    { this.state.isLoading ? <Loader/> :
+                    { this.props.isLoading ? <Loader/> :
                         <ul>
                             {this.renderQuizes()}
                         </ul>
@@ -67,3 +42,18 @@ export default class QuizListComponent extends Component {
         )
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        quizes: state.quiz.quizes,
+        isLoading: state.quiz.isLoading
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        fetchQuizes: () => dispatch(fetchQuizes())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuizListComponent)
